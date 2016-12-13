@@ -211,6 +211,58 @@ public class IntList {
                 return cnt;
         }
     }
+    private int length() {
+        if(tail == null) {
+            return 1;
+        }
+        else {
+            return 1 + length();
+        }
+    }
+    private static IntList insertFront(IntList A,int n) {
+        A = new IntList(n,A);
+        return A;
+    }
+
+    private IntList insertBack(int n) {
+        if(tail == null){
+            tail = new IntList(n,null);
+            return null;
+        }
+        else {
+            tail.insertBack(n);
+            return this;
+        }
+    }
+    private static IntList reverseHelper(IntList A) {
+        if(A.tail == null || A == null) {
+            return A;
+        }
+        else {
+            IntList.reverseHelper(A.tail);
+            A.insertBack(A.head);
+            A.head = A.tail.head;
+            return A;
+        }
+
+    }
+    /**
+     * Returns the reverse of the given IntList.
+     * This method is destructive. If given null
+     * as an input, returns null.
+     */
+    public static IntList reverse(IntList A) {
+        if(A.tail == null || A == null) {
+            return A;
+        }
+       IntList.reverseHelper(A);
+       int old = A.head;
+       while(old == A.tail.head){
+           A = A.tail;
+       }
+       return A;
+    }
+
 
     @Override
     /** Outputs the IntList as a String. You are not expected to read
