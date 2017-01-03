@@ -36,17 +36,29 @@ public class TestPlip {
 
     @Test
     public void testReplicate() {
+        Plip p = new Plip(2);
+        Plip son = p.replicate();
+        assertEquals(1,p.energy(),0.01);
+        assertNotSame(p,son);
 
     }
 
-    //@Test
+    @Test
     public void testChoose() {
         Plip p = new Plip(1.2);
+        Plip pLowEnergy = new Plip(0.8);
         HashMap<Direction, Occupant> surrounded = new HashMap<Direction, Occupant>();
         surrounded.put(Direction.TOP, new Impassible());
         surrounded.put(Direction.BOTTOM, new Impassible());
         surrounded.put(Direction.LEFT, new Impassible());
         surrounded.put(Direction.RIGHT, new Impassible());
+
+        HashMap<Direction, Occupant> oneEmpty = new HashMap<>();
+        oneEmpty.put(Direction.TOP, new Impassible());
+        oneEmpty.put(Direction.BOTTOM, new Impassible());
+        oneEmpty.put(Direction.LEFT, new Impassible());
+        oneEmpty.put(Direction.RIGHT, new Empty());
+
 
         //You can create new empties with new Empty();
         //Despite what the spec says, you cannot test for Cloruses nearby yet.
@@ -56,6 +68,18 @@ public class TestPlip {
         Action expected = new Action(Action.ActionType.STAY);
 
         assertEquals(expected, actual);
+
+        Action actualOneEmpty = p.chooseAction(oneEmpty);
+        Action expectedOneEmpty = new Action(Action.ActionType.REPLICATE, Direction.RIGHT);
+
+        assertEquals(actualOneEmpty, expectedOneEmpty);
+
+        Action actualLowEnery = pLowEnergy.chooseAction(oneEmpty);
+        Action expectedLowEnergy = new Action(Action.ActionType.STAY);
+
+        assertEquals(actualLowEnery, expectedLowEnergy);
+
+
     }
 
     public static void main(String[] args) {

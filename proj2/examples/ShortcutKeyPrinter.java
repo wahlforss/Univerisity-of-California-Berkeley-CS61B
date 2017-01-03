@@ -33,7 +33,7 @@ public class ShortcutKeyPrinter extends Application {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.isShortcutDown()) {
-                    if (keyEvent.getCode() == KeyCode.A) {
+                    if (keyEvent.getCode() == KeyCode.MINUS) {
                         System.out.println(MESSAGE_PREFIX + " in addition to \"a\"");
                     } else if (keyEvent.getCode() == KeyCode.Z) {
                         System.out.println(MESSAGE_PREFIX + " in addition to \"z\"");

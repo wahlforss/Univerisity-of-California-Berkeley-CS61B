@@ -20,14 +20,14 @@ public class CopyFile {
         String outputFilename = args[1];
 
         try {
-            File inputFile = new File(inputFilename);
+            File inputFile = new File("YO.rtf");
             // Check to make sure that the input file exists!
             if (!inputFile.exists()) {
                 System.out.println("Unable to copy because file with name " + inputFilename
                     + " does not exist");
                 return;
             }
-            FileReader reader = new FileReader(inputFile);
+            FileReader reader = new FileReader("YO.rtf");
             // It's good practice to read files using a buffered reader.  A buffered reader reads
             // big chunks of the file from the disk, and then buffers them in memory.  Otherwise,
             // if you read one character at a time from the file using FileReader, each character
@@ -46,6 +46,7 @@ public class CopyFile {
                 // The integer read can be cast to a char, because we're assuming ASCII.
                 char charRead = (char) intRead;
                 writer.write(charRead);
+
             }
 
             System.out.println("Successfully copied file " + inputFilename + " to "
